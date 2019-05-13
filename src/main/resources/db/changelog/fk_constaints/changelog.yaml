@@ -1,0 +1,136 @@
+databaseChangeLog:
+# Account constraints
+  - changeSet:
+      id: fk_account_currency
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: currency_id
+            baseTableName: accounts
+            constraintName: fk_account_currency
+            referencedColumnNames: currency_id
+            referencedTableName: currencies
+  - changeSet:
+      id: fk_account_user
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: accounts
+            constraintName: fk_account_user
+            referencedColumnNames: user_id
+            referencedTableName: users
+# Category constraint
+  - changeSet:
+      id: fk_category_user
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: categories
+            constraintName: fk_category_user
+            referencedColumnNames: user_id
+            referencedTableName: users
+# Transaction constraints
+  - changeSet:
+      id: fk_transaction_account
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: account_id
+            baseTableName: transactions
+            constraintName: fk_transaction_account
+            referencedColumnNames: account_id
+            referencedTableName: accounts
+  - changeSet:
+      id: fk_transaction_category
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: transactions
+            constraintName: fk_transaction_category
+            referencedColumnNames: category_id
+            referencedTableName: categories
+  - changeSet:
+      id: fk_transaction_currency
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: currency_id
+            baseTableName: transactions
+            constraintName: fk_transaction_currency
+            referencedColumnNames: currency_id
+            referencedTableName: currencies
+  - changeSet:
+      id: fk_transaction_account_currency
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: account_currency
+            baseTableName: transactions
+            constraintName: fk_transaction_account_currency
+            referencedColumnNames: currency_id
+            referencedTableName: currencies
+# Planned Payment constraints
+  - changeSet:
+      id: fk_planned_payment_account
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: account_id
+            baseTableName: planned_payments
+            constraintName: fk_planned_payment_account
+            referencedColumnNames: account_id
+            referencedTableName: accounts
+  - changeSet:
+      id: fk_planned_payment_category
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: planned_payments
+            constraintName: fk_planned_payment_category
+            referencedColumnNames: category_id
+            referencedTableName: categories
+  - changeSet:
+      id: fk_planned_payment_currency
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: currency_id
+            baseTableName: planned_payments
+            constraintName: fk_planned_payment_currency
+            referencedColumnNames: currency_id
+            referencedTableName: currencies
+  - changeSet:
+      id: fk_planned_payment_account_currency
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: account_currency
+            baseTableName: planned_payments
+            constraintName: fk_planned_payment_account_currency
+            referencedColumnNames: currency_id
+            referencedTableName: currencies
+# Budget constraints
+  - changeSet:
+      id: fk_budget_transation
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: budget_id
+            baseTableName: budgets_has_transactions
+            constraintName: fk_budget_transation
+            referencedColumnNames: transaction_id
+            referencedTableName: transactions
+  - changeSet:
+      id: fk_transation_budget
+      author: blagoynikolov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: transaction_id
+            baseTableName: budgets_has_transactions
+            constraintName: fk_transation_budget
+            referencedColumnNames: budget_id
+            referencedTableName: budgets

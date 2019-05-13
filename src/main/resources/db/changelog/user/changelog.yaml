@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/user/tables.yaml
+  - include:
+      file: db/changelog/user/constraints.yaml
+  - include:
+      file: db/changelog/user/indexes.yaml

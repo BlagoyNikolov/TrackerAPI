@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: planned_payment
+      author: blagoynikolov
+      changes:
+        - createTable:
+            remarks: Planned payments
+            tableName: planned_payments
+            catalogName: finance_tracker_hibernate
+            columns:
+              - column:
+                  name: planned_payment_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: type
+                  type: varchar(36)
+              - column:
+                  name: from_date
+                  type: datetime
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: amount
+                  type: number(19, 6)
+              - column:
+                  name: account_id
+                  type: bigint
+              - column:
+                  name: category_id
+                  type: bigint
+              - column:
+                  name: currency_id
+                  type: char(3)
+              - column:
+                  name: account_currency
+                  type: char(3)
+              - column:
+                  name: category_name
+                  type: varchar(255)
+              - column:
+                  name: date_modified
+                  type: datetime
+              - column:
+                  name: inserted_by
+                  type: varchar(255)
+              - column:
+                  name: account_amount
+                  type: number(19, 6)
+              - column:
+                  name: eur_amount
+                  type: number(19, 6)
+            schemaName: public
+            tablespace: A String

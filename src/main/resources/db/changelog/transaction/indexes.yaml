@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: transaction_index
+      author: blagoynikolov
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: transaction_id
+                  type: bigint
+            indexName: transaction_fk_i
+            tableName: transactions
+            unique: false

@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: budgets_has_transactions
+      author: blagoynikolov
+      changes:
+        - createTable:
+            remarks: budgets_has_transactions
+            tableName: budgets_has_transactions
+            catalogName: finance_tracker_hibernate
+            columns:
+              - column:
+                  name: budget_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+            schemaName: public
+            tablespace: A String

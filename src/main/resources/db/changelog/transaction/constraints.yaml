@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: transaction_pk
+      author: blagoynikolov
+      changes:
+        - addPrimaryKey:
+            columnNames: transaction_id
+            constraintName: transaction_pk
+            tableName: transactions
+        - addAutoIncrement:
+            catalogName: finance_tracker_hibernate
+            columnDataType: bigint
+            columnName: transaction_id
+            incrementBy: 1
+            schemaName: public
+            startWith: 1
+            tableName: transactions

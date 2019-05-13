@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: planned_payment_pk
+      author: blagoynikolov
+      changes:
+        - addPrimaryKey:
+            columnNames: planned_payment_id
+            constraintName: planned_payment_pk
+            tableName: planned_payments
+        - addAutoIncrement:
+            catalogName: finance_tracker_hibernate
+            columnDataType: bigint
+            columnName: planned_payment_id
+            incrementBy: 1
+            schemaName: public
+            startWith: 1
+            tableName: planned_payments

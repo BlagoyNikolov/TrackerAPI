@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: budget_pk
+      author: blagoynikolov
+      changes:
+        - addPrimaryKey:
+            columnNames: budget_id
+            constraintName: budget_pk
+            tableName: budgets
+        - addAutoIncrement:
+            catalogName: finance_tracker_hibernate
+            columnDataType: bigint
+            columnName: budget_id
+            incrementBy: 1
+            schemaName: public
+            startWith: 1
+            tableName: budgets

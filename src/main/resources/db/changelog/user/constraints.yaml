@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: user_pk
+      author: blagoynikolov
+      changes:
+        - addPrimaryKey:
+            columnNames: user_id
+            constraintName: user_pk
+            tableName: users
+        - addAutoIncrement:
+            catalogName: finance_tracker_hibernate
+            columnDataType: bigint
+            columnName: user_id
+            incrementBy: 1
+            schemaName: public
+            startWith: 1
+            tableName: users

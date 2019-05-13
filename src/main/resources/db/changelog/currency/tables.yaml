@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: currency
+      author: blagoynikolov
+      changes:
+        - createTable:
+            remarks: Currencies
+            tableName: currencies
+            catalogName: finance_tracker_hibernate
+            columns:
+              - column:
+                  name: currency_id
+                  type: char(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language
+                  type: varchar(255)
+              - column:
+                  name: region
+                  type: varchar(255)
+            schemaName: public
+            tablespace: A String

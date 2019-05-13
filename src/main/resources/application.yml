@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/finance_tracker_hibernate
+    username: root
+    password: root
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: true
+  security:
+    user:
+      name: namaikati
+      password: $2a$10$CAd5m1J9mF5DvRbPoQVfPu4yGWTAFgBY3DIkWcQe3mj2Ba.lB3Ffu
+
+fx:
+  baseUrl: https://free.currencyconverterapi.com/api/v6/convert?q=

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: currency_pk
+      author: blagoynikolov
+      changes:
+        - addPrimaryKey:
+            columnNames: currency_id
+            constraintName: currency_pk
+            tableName: currencies

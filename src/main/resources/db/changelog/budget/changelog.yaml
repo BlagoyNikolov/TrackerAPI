@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/budget/tables.yaml
+  - include:
+      file: db/changelog/budget/constraints.yaml
+  - include:
+      file: db/changelog/budget/indexes.yaml

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/currency/tables.yaml
+  - include:
+      file: db/changelog/currency/constraints.yaml
+  - include:
+      file: db/changelog/currency/indexes.yaml

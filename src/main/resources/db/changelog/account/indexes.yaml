@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: account_index
+      author: blagoynikolov
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: account_id
+                  type: bigint
+            indexName: account_fk_i
+            tableName: accounts
+            unique: false

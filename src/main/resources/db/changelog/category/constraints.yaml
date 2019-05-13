@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: category_pk
+      author: blagoynikolov
+      changes:
+        - addPrimaryKey:
+            columnNames: category_id
+            constraintName: category_pk
+            tableName: categories
+        - addAutoIncrement:
+            catalogName: finance_tracker_hibernate
+            columnDataType: bigint
+            columnName: category_id
+            incrementBy: 1
+            schemaName: public
+            startWith: 1
+            tableName: categories

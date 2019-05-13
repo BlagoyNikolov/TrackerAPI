@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: currency_index
+      author: blagoynikolov
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: currency_id
+                  type: char(3)
+            indexName: currency_fk_i
+            tableName: currencies
+            unique: false

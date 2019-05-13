@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: budget_index
+      author: blagoynikolov
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: budget_id
+                  type: bigint
+            indexName: budget_fk_i
+            tableName: budgets
+            unique: false

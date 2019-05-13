@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: user
+      author: blagoynikolov
+      changes:
+        - createTable:
+            remarks: Users
+            tableName: users
+            catalogName: finance_tracker_hibernate
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+            schemaName: public
+            tablespace: A String

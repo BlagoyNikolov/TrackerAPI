@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/user/changelog.yaml
+  - include:
+      file: db/changelog/account/changelog.yaml
+  - include:
+      file: db/changelog/category/changelog.yaml
+  - include:
+      file: db/changelog/budget/changelog.yaml
+  - include:
+      file: db/changelog/transaction/changelog.yaml
+  - include:
+      file: db/changelog/planned_payment/changelog.yaml
+  - include:
+      file: db/changelog/currency/changelog.yaml
+  - include:
+      file: db/changelog/budgets_has_transactions/changelog.yaml
+  - include:
+      file: db/changelog/fk_constaints/changelog.yaml
+  - include:
+      file: db/changelog/data/data.yaml

@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: category
+      author: blagoynikolov
+      changes:
+        - createTable:
+            remarks: Categories
+            tableName: categories
+            catalogName: finance_tracker_hibernate
+            columns:
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: type
+                  type: varchar(36)
+              - column:
+                  name: user_id
+                  type: bigint
+            schemaName: public
+            tablespace: A String
