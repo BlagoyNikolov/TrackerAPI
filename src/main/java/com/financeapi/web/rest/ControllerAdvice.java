@@ -1,4 +1,4 @@
-package com.financeapi.config;
+package com.financeapi.web.rest;
 
 import com.financeapi.exceptions.InvalidInputException;
 import com.financeapi.exceptions.account.AccountAlreadyExistsException;

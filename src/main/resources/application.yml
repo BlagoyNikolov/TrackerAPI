@@ -8,7 +8,7 @@ spring:
     show-sql: true
   security:
     user:
-      name: namaikati
+      name: user
       password: $2a$10$CAd5m1J9mF5DvRbPoQVfPu4yGWTAFgBY3DIkWcQe3mj2Ba.lB3Ffu
 
 fx:
