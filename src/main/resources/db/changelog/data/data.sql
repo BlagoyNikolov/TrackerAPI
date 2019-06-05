@@ -6,3 +6,5 @@ VALUES ('Deposit','DEPOSIT', null);
 
 INSERT INTO finance_tracker_hibernate.currencies (currency_id, language, region)
 VALUES ('BGN', 'bg', 'BG'), ('CAD', 'en', 'CA'), ('EUR', 'de', 'DE'), ('GBP', 'en', 'GB'), ('JPY', 'ja', 'JP'), ('USD', 'en', 'US');
+
+-- UPDATE finance_tracker_hibernate.users SET is_admin = 1 WHERE user_id = 1;

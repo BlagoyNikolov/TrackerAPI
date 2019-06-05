@@ -1,6 +1,5 @@
 package com.financeapi.web.rest.controller;
 
-import com.financeapi.exceptions.InvalidInputException;
 import com.financeapi.services.UserService;
 import com.financeapi.web.rest.resources.login.LoginRequest;
 import com.financeapi.web.rest.resources.login.RegisterRequest;
@@ -29,8 +28,7 @@ public class UserController {
   @ResponseStatus(HttpStatus.OK)
   public void login(
       @ApiParam(value = "The login request containing the payload with user details")
-      @Valid @RequestBody LoginRequest loginRequest
-  ) throws InvalidInputException {
+      @Valid @RequestBody LoginRequest loginRequest) {
     userService.login(loginRequest);
   }
 
@@ -39,8 +37,7 @@ public class UserController {
   @ResponseStatus(HttpStatus.CREATED)
   public RegisterResponse register(
       @ApiParam(value = "The register request containing the payload with user details")
-      @Valid @RequestBody RegisterRequest registerRequest
-  ) throws InvalidInputException {
+      @Valid @RequestBody RegisterRequest registerRequest) {
     return userService.register(registerRequest);
   }
 }

@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
   private AccountMapper accountMapper;
 
   @Override
-  public AccountResponse retrieveAccount(Long accountId) throws AccountNotFoundException {
+  public AccountResponse retrieveAccount(Long accountId) {
     Account account = accountRepository.findByAccountId(accountId)
         .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
     AccountResponse accountResponse = accountMapper.accountToAccountResponse(account);
@@ -50,8 +50,7 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public AccountResponse createAccount(AccountRequest accountRequest)
-      throws UserNotFoundException, CurrencyNotFoundException, AccountAlreadyExistsException, AccountNotFoundException {
+  public AccountResponse createAccount(AccountRequest accountRequest) {
     validateForExistingAccount(accountRequest);
     User user = userService.getUser(accountRequest.getUserId())
         .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
@@ -66,7 +65,7 @@ public class AccountServiceImpl implements AccountService {
     return accountResponse;
   }
 
-  private void validateForExistingAccount(AccountRequest accountRequest) throws AccountAlreadyExistsException {
+  private void validateForExistingAccount(AccountRequest accountRequest) {
     boolean accountExists = accountRepository.existsByUserUserIdAndName(accountRequest.getUserId(), accountRequest.getName());
     if (accountExists) {
       throw new AccountAlreadyExistsException(ACCOUNT_ALREADY_EXISTS);

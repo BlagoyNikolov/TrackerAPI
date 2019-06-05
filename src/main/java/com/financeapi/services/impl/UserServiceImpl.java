@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
   private UserMapper userMapper;
 
   @Override
-  public void login(LoginRequest loginRequest) throws InvalidInputException {
+  public void login(LoginRequest loginRequest) {
     User user = userRepository.findByUsername(loginRequest.getUsername())
         .orElseThrow(() -> new InvalidInputException(USER_NOT_FOUND));
 
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public RegisterResponse register(RegisterRequest registerRequest) throws InvalidInputException {
+  public RegisterResponse register(RegisterRequest registerRequest) {
     validateUsernameExists(registerRequest.getUsername());
     validateEmailExists(registerRequest.getEmail());
     User newUser = persistUser(registerRequest);
@@ -60,13 +60,13 @@ public class UserServiceImpl implements UserService {
     return userRepository.save(newUser);
   }
 
-  private void validateUsernameExists(String username) throws InvalidInputException {
+  private void validateUsernameExists(String username) {
     if (userRepository.findByUsername(username).isPresent()) {
       throw new InvalidInputException(USERNAME_ALREADY_EXISTS);
     }
   }
 
-  private void validateEmailExists(String email) throws InvalidInputException {
+  private void validateEmailExists(String email) {
     if (userRepository.findByEmail(email).isPresent()) {
       throw new InvalidInputException(EMAIL_ALREADY_EXISTS);
     }

@@ -1,9 +1,5 @@
 package com.financeapi.web.rest.controller;
 
-import com.financeapi.exceptions.account.AccountAlreadyExistsException;
-import com.financeapi.exceptions.account.AccountNotFoundException;
-import com.financeapi.exceptions.currency.CurrencyNotFoundException;
-import com.financeapi.exceptions.user.UserNotFoundException;
 import com.financeapi.services.AccountService;
 import com.financeapi.web.rest.resources.account.AccountRequest;
 import com.financeapi.web.rest.resources.account.AccountResponse;
@@ -33,8 +29,7 @@ public class AccountController {
   @ResponseStatus(HttpStatus.OK)
   public AccountResponse retrieveAccount(
       @ApiParam(value = "The id of the existing account")
-      @PathVariable Long accountId
-  ) throws AccountNotFoundException {
+      @PathVariable Long accountId) {
     return accountService.retrieveAccount(accountId);
   }
 
@@ -43,8 +38,7 @@ public class AccountController {
   @ResponseStatus(HttpStatus.CREATED)
   public AccountResponse createAccount(
       @ApiParam(value = "The request containing the payload needed to create a new account")
-      @Valid @RequestBody AccountRequest accountRequest
-  ) throws UserNotFoundException, CurrencyNotFoundException, AccountAlreadyExistsException, AccountNotFoundException {
+      @Valid @RequestBody AccountRequest accountRequest) {
     return accountService.createAccount(accountRequest);
   }
 }

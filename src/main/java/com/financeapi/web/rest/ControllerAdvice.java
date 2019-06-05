@@ -17,30 +17,30 @@ public class ControllerAdvice {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({InvalidInputException.class})
   public ErrorResponse handleInvalidInputException(Exception e) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), e.getMessage());
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({AccountNotFoundException.class})
   public ErrorResponse handleAccountNotFoundException(Exception e) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), e.getMessage());
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({UserNotFoundException.class})
   public ErrorResponse handleUserNotFoundException(Exception e) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), e.getMessage());
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({CurrencyNotFoundException.class})
   public ErrorResponse handleCurrencyNotFoundException(Exception e) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), e.getMessage());
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler({AccountAlreadyExistsException.class})
   public ErrorResponse handleAccountAlreadyExistsException(Exception e) {
-    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), e.getMessage());
   }
 }
