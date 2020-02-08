@@ -5,52 +5,51 @@ import com.financeapi.exceptions.InvalidInputException;
 import com.financeapi.mappers.UserMapper;
 import com.financeapi.repositories.UserRepository;
 import com.financeapi.services.UserService;
-import com.financeapi.web.rest.resources.login.LoginRequest;
 import com.financeapi.web.rest.resources.login.RegisterRequest;
 import com.financeapi.web.rest.resources.login.RegisterResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
+
   public static final String USER_NOT_FOUND = "User not found";
-  public static final String INVALID_PASSWORD = "Invalid password";
   public static final String USERNAME_ALREADY_EXISTS = "Username already exists";
   public static final String EMAIL_ALREADY_EXISTS = "Email already exists";
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  private final UserMapper userMapper;
 
-  @Autowired
-  private UserMapper userMapper;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
-  public void login(LoginRequest loginRequest) {
-    User user = userRepository.findByUsername(loginRequest.getUsername())
-        .orElseThrow(() -> new InvalidInputException(USER_NOT_FOUND));
-
-    if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-      throw new InvalidInputException(INVALID_PASSWORD);
-    }
+  public Optional<User> getUser(Long userId) {
+    return userRepository.getByUserId(userId);
   }
 
   @Override
-  public RegisterResponse register(RegisterRequest registerRequest) {
+  public RegisterResponse createUser(RegisterRequest registerRequest) {
     validateUsernameExists(registerRequest.getUsername());
     validateEmailExists(registerRequest.getEmail());
     User newUser = persistUser(registerRequest);
     return userMapper.userToRegisterResponse(newUser);
   }
 
-  @Override
-  public Optional<User> getUser(Long userId) {
-    return userRepository.getByUserId(userId);
+  private void validateUsernameExists(String username) {
+    userRepository.findByUsername(username).ifPresent(u -> {
+      throw new InvalidInputException(USERNAME_ALREADY_EXISTS);
+    });
+  }
+
+  private void validateEmailExists(String email) {
+    userRepository.findByEmail(email).ifPresent(e -> {
+      throw new InvalidInputException(EMAIL_ALREADY_EXISTS);
+    });
   }
 
   private User persistUser(RegisterRequest registerRequest) {
@@ -59,17 +58,4 @@ public class UserServiceImpl implements UserService {
     newUser.setPassword(encryptedPassword);
     return userRepository.save(newUser);
   }
-
-  private void validateUsernameExists(String username) {
-    if (userRepository.findByUsername(username).isPresent()) {
-      throw new InvalidInputException(USERNAME_ALREADY_EXISTS);
-    }
-  }
-
-  private void validateEmailExists(String email) {
-    if (userRepository.findByEmail(email).isPresent()) {
-      throw new InvalidInputException(EMAIL_ALREADY_EXISTS);
-    }
-  }
-
 }

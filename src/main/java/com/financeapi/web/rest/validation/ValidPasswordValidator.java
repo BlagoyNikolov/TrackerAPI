@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.stream.Collectors;
 
 public class ValidPasswordValidator implements ConstraintValidator<ValidPassword, String> {
 
@@ -40,9 +39,7 @@ public class ValidPasswordValidator implements ConstraintValidator<ValidPassword
       return true;
     }
 
-    String messageTemplate = validator.getMessages(result)
-        .stream()
-        .collect(Collectors.joining(" "));
+    String messageTemplate = String.join(" ", validator.getMessages(result));
     context.buildConstraintViolationWithTemplate(messageTemplate)
         .addConstraintViolation()
         .disableDefaultConstraintViolation();

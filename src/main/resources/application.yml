@@ -6,10 +6,11 @@ spring:
   jpa:
     hibernate.ddl-auto: none
     show-sql: true
-  security:
-    user:
-      name: user
-      password: $2a$10$CAd5m1J9mF5DvRbPoQVfPu4yGWTAFgBY3DIkWcQe3mj2Ba.lB3Ffu
 
 fx:
   baseUrl: https://free.currencyconverterapi.com/api/v6/convert?q=
+
+## App Properties
+jwt:
+  secret: JWTSuperSecretKey
+  expirationInMs: 604800000

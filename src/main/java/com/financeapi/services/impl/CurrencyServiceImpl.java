@@ -1,10 +1,13 @@
 package com.financeapi.services.impl;
 
 import com.financeapi.entities.Currency;
+import com.financeapi.exceptions.currency.CurrencyNotFoundException;
+import com.financeapi.mappers.CurrencyMapper;
 import com.financeapi.repositories.CurrencyRepository;
 import com.financeapi.services.CurrencyService;
+import com.financeapi.web.rest.resources.currency.CurrencyResponse;
 import com.financeapi.web.rest.resources.fx.FxResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,26 +17,38 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class CurrencyServiceImpl implements CurrencyService {
 
-  @Autowired
-  private CurrencyRepository currencyRepository;
+  private static final String CURRENCY_NOT_FOUND = "Currency not found";
+
+  private final CurrencyRepository currencyRepository;
+
+  private final CurrencyMapper currencyMapper;
 
   @Value("${fx.baseUrl}")
   private String fxEndpoint;
 
   @Override
-  public Optional<Currency> getCurrencyByCurrencyId(String currencyId) {
+  public Optional<Currency> getCurrency(String currencyId) {
     return currencyRepository.findByCurrencyId(currencyId);
   }
 
   @Override
-  public List<String> getAllCurrencies() {
+  public CurrencyResponse getCurrencyById(String currencyId) {
+    Currency currency = currencyRepository.findByCurrencyId(currencyId)
+        .orElseThrow(() -> new CurrencyNotFoundException(CURRENCY_NOT_FOUND));
+
+    return currencyMapper.currencyToCurrencyResponse(currency);
+  }
+
+  @Override
+  public List<CurrencyResponse> getAllCurrencies() {
     return currencyRepository.findAll()
-        .stream()
-        .map(Currency::getCurrencyId)
-        .collect(Collectors.toList());
+                             .stream()
+                             .map(currencyMapper::currencyToCurrencyResponse)
+                             .collect(Collectors.toList());
   }
 
   @Override

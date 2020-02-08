@@ -15,12 +15,13 @@ import com.financeapi.services.UserService;
 import com.financeapi.web.rest.controller.AccountController;
 import com.financeapi.web.rest.resources.account.AccountRequest;
 import com.financeapi.web.rest.resources.account.AccountResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+@RequiredArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService {
   public static final String ACCOUNT_NOT_FOUND = "Account not found for the given user id";
@@ -28,17 +29,13 @@ public class AccountServiceImpl implements AccountService {
   public static final String CURRENCY_NOT_FOUND = "Currency not found for the given currency id";
   public static final String ACCOUNT_ALREADY_EXISTS = "This account already exists for this user";
 
-  @Autowired
-  private AccountRepository accountRepository;
+  private final AccountRepository accountRepository;
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
-  @Autowired
-  private CurrencyService currencyService;
+  private final CurrencyService currencyService;
 
-  @Autowired
-  private AccountMapper accountMapper;
+  private final AccountMapper accountMapper;
 
   @Override
   public AccountResponse retrieveAccount(Long accountId) {
@@ -54,7 +51,7 @@ public class AccountServiceImpl implements AccountService {
     validateForExistingAccount(accountRequest);
     User user = userService.getUser(accountRequest.getUserId())
         .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-    Currency currency = currencyService.getCurrencyByCurrencyId(accountRequest.getCurrency())
+    Currency currency = currencyService.getCurrency(accountRequest.getCurrency())
         .orElseThrow(() -> new CurrencyNotFoundException(CURRENCY_NOT_FOUND));
 
     Account account = persistAccount(accountRequest, user, currency);

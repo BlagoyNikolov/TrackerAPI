@@ -1,4 +1,4 @@
-package com.financeapi.components;
+package com.financeapi.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -16,6 +16,6 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
                        HttpServletResponse response,
                        AuthenticationException authException) throws IOException {
 
-    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
   }
 }

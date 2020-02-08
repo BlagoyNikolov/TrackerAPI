@@ -5,7 +5,7 @@ import com.financeapi.web.rest.resources.account.AccountRequest;
 import com.financeapi.web.rest.resources.account.AccountResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/tracker")
 public class AccountController {
 
-  @Autowired
-  private AccountService accountService;
+  private final AccountService accountService;
 
   @ApiOperation(value = "Retrieves an account")
   @GetMapping("/v1/accounts/{accountId}")
